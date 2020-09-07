@@ -14,4 +14,17 @@ urlpatterns = [
     path('vendor/',views.openVendor,name='vendor'),
     path('resports/',views.openReporsts,name='reports'),
     path('logout/',views.pwn_login_check,name='logout'),
+    path('saveState/',views.saveState,name="saveState"),
+    path('updateState/',views.updateState,name="updateState"),
+    path('deleteState/',views.deleteState,name="deleteState"),
+
+
+    path('saveCity/',views.saveCity,name="saveCity"),
+    path('updateCity/',views.updateCity,name="updateCity"),
+    path('deleteCity/',views.deleteCity,name="deleteCity"),
+
+    path('saveCuisine/', views.saveCuisine, name="saveCuisine"),
+    path('updateCuisine/', views.updateCuisine, name="updateCuisine"),
+    path('deleteCuisine/', views.deleteCuisine, name="deleteCuisine"),
+
 ]
