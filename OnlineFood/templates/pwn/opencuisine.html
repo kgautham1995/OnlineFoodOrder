@@ -6,22 +6,6 @@
     <div class="col-sm-6">
           <h1>Add Cuisine</h1>
 
-{#    <form action="" method="post" enctype="multipart/form-data">#}
-{#        {% csrf_token %}#}
-{#        <div class="row">#}
-{#            <div class="col">#}
-{#                <div  class="form-group">#}
-{#                        <input type="text" name="cuisine" id="cuisine" class="form-control" placeholder="Cuisine Type" value="{{ cuisine }}">#}
-{#                </div>#}
-{#                <div class="custom-file">#}
-{#                    <input type="file" name="photo" class="custom-file-input" value="{{ photo }}" id="photo" aria-describedby="inputGroupFileAddon01">#}
-{#                    <label class="custom-file-label" for="inputGroupFile01">Choose Photo</label>#}
-{#                </div><br><br>#}
-{#                <button type="submit" class="btn btn-success">Add</button>#}
-{#            </div>#}
-{#        </div>#}
-{#    </form>#}
-
 <form action="{% url 'saveCuisine' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row">
@@ -30,8 +14,8 @@
                 </div>
                 <div class="col">
                     <div class="custom-file">
-                    <input type="file" name="photo" class="custom-file-input" value="{{ photo }}" id="photo" aria-describedby="inputGroupFileAddon01">
-                    <label class="custom-file-label" for="inputGroupFile01">Choose Photo</label>
+                    <input type="file" name="photo" class="custom-file-input" value="{{ photo.url }}" id="photo" aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">{% if photo %}{{ photo.name }}{% else %}Choose Image{% endif %}</label>
                     </div>
                 </div>
                 &nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-success">Add</button>
@@ -53,7 +37,7 @@
     {% if cuisine_data %}
 
         <table align="center" border="5" style="min-width: 500px">
-        <tr><th class="tbl_ttl" colspan="5">States</th></tr>
+        <tr><th class="tbl_ttl" colspan="5">Cuisine</th></tr>
             <tr>
                 <th class="tbl_th">Id</th>
                 <th class="tbl_th">Name</th>
@@ -81,13 +65,13 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Are you sure you want to delete?
+        Are you sure you want to delete {{ data.type }} type ?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>

@@ -87,31 +87,8 @@ def saveCity(request):
             pass
         else:
             cm.photo=request.FILES.get("photo")
-        print(cm.city_state)
-        print(cm.city_state.id)
-        print(request.POST.get("city_state"))
-        print(request.POST.get("state"))
-
-        sm = StateModel.objects.get(id=request.POST.get("state"))
-
-        cm.city_state.id=sm
-
-
-        print("After",cm.city_state.id)
-
-
         cm.save()
-
-
-
-        # CityModel(city_state=sm).save()
-
-
-
-
-        # cm1=CityModel.objects.get(city_state_id=request.POST.get("city_state"))
-
-        print("Again After", cm.city_state.id)
+        updateCityId(request,request.POST.get("upd_idno"),request.POST.get("state"))
         return render(request,"pwn/opencity.html",{"success":"Updated Successfully","city_data": CityModel.objects.all(),"state":StateModel.objects.only('name')})
     else:
         try:
@@ -123,13 +100,16 @@ def saveCity(request):
             messages.success(request, "City Added")
             return redirect('city')
 
+def updateCityId(request,upd_id,fkid):
+    sm=StateModel.objects.get(id=fkid)
+    CityModel.objects.filter(id=upd_id).update(city_state_id=sm.id)
 
 def updateCity(request):
     idno = request.GET.get("idno")
     print(idno)
     cm = CityModel.objects.get(id=idno)
     return render(request, "pwn/opencity.html",
-                  {"idno": cm.id, "city_state":cm.city_state.id, "city": cm.name, "photo": cm.photo, "city_data": CityModel.objects.all(),"state":StateModel.objects.only('name')})
+                  {"idno": cm.id, "city_state":cm.city_state.id, "state_name":cm.city_state.name , "city": cm.name, "photo": cm.photo, "city_data": CityModel.objects.all(),"state":StateModel.objects.only('name')})
 
 
 def deleteCity(request):

@@ -17,7 +17,7 @@
                 <div class="col">
                     <div class="custom-file">
                     <input type="file" name="photo" class="custom-file-input" value="{{ photo }}" id="photo" aria-describedby="inputGroupFileAddon01">
-                    <label class="custom-file-label" for="inputGroupFile01">Choose Photo</label>
+                    <label class="custom-file-label" for="inputGroupFile01">{% if photo %}{{ photo.name }}{% else %}Choose Image{% endif %}</label>
                     </div>
                 </div>
                 &nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-success">Add</button>
@@ -67,13 +67,13 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Are you sure you want to delete?
+        Are you sure you want to delete {{ data.name }} state ?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
